@@ -2,12 +2,12 @@ const Koa = require('koa')
 const app = new Koa()
 const server = require('http').Server(app.callback())
 const io = require('socket.io')(server)
-
+const socket = require('./controller/socket');
 
 // DB
-const db = []
+// const db = []
 
-io.on('connection', socket =>{
+io.sockets.on('connection', socket); /* socket =>{
   console.log( 'user connected' )
   io.emit('message', db)
 
@@ -19,7 +19,7 @@ io.on('connection', socket =>{
   })
 
   socket.on('disconnect', (reason)=>console.log( 'socket disconnected', reason ))
-})
+}) */
 
 // start server
 server.listen(5000, ()=>console.log( `server running at 5000` ))
