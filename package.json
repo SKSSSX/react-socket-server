@@ -1,0 +1,29 @@
+{
+  "name": "react-socket-server",
+  "version": "0.1.0",
+  "private": true,
+  "author": "sanks",
+  "scripts": {
+    "build": "browserify ./client/app.jsx -t babelify --outfile ./public/js/app.js",
+    "start": "node app/app.js"
+  },
+  "dependencies": {
+    "koa": "^2.13.4",
+    "koa-static": "^5.0.0",
+    "koa-views": "^8.0.0",
+    "react": "^0.13.3",
+    "socket.io": "^1.3.5"
+  },
+  "devDependencies": {
+    "babelify": "^6.1.3",
+    "browserify": "^10.2.6"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "license": "MIT"
+}
