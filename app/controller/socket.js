@@ -49,7 +49,7 @@ var userNames = (function () {
 }());
 
 // export function for listening to the socket
-module.exports = function (socket) {
+exports.socket = function (socket) {
   var name = userNames.getGuestName();
 
   // send the new user their name and a list of users

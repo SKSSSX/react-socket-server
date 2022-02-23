@@ -2,24 +2,20 @@ const Koa = require('koa')
 const app = new Koa()
 const server = require('http').Server(app.callback())
 const io = require('socket.io')(server)
-const socket = require('./controller/socket');
+const router = require("koa-router")();
+const addRouters = require("./router");
+const addSocket = require("./socket");
+const config = require("./config/app");
 
-// DB
-// const db = []
+// add route
+addRouters(router);
+app.use(router.routes()).use(router.allowedMethods());
+/**
+ * socket.io
+ */
+addSocket(io);
 
-io.sockets.on('connection', socket); /* socket =>{
-  console.log( 'user connected' )
-  io.emit('message', db)
-
-  socket.on('message', val=>{
-    db.push(val)
-    console.log( `added '${val}' to DB` )
-
-    io.emit('message', db)
-  })
-
-  socket.on('disconnect', (reason)=>console.log( 'socket disconnected', reason ))
-}) */
+const { socketPort } = config;
 
 // start server
-server.listen(5000, ()=>console.log( `server running at 5000` ))
+server.listen(socketPort, ()=>console.log("socket server running at: http://localhost:%d", socketPort));
