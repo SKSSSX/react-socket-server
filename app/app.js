@@ -2,10 +2,12 @@ const Koa = require('koa')
 const cors = require('@koa/cors');
 const app = new Koa()
 const server = require('http').Server(app.callback())
-const io = require('socket.io')(server)
+const io = require('socket.io')(server, {
+  path: '/deviceInfo' // 这个很重要，是命名空间
+});
 const router = require("koa-router")();
 const addRouters = require("./router");
-const creatSocket = require("./socket");
+const creatSocket = require('./socket');
 const config = require("./config/app");
 
 app.use(cors()); //设置跨域cors
