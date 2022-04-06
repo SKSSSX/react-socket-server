@@ -7,12 +7,7 @@ class msgController {
   static async storeMessages(ctx) {
     const context = ctx.request.body;
     console.log(context);
-    client.set(context, 'set messages', function(err) {
-      console.log(`socketId——${context.roomId}`);
-      if (err) {
-        console.log(`${err}`);
-      };
-    });
+    client.set('stringKey', 'stringValue'); 
   }
 }
 module.exports = msgController
