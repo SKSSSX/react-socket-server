@@ -1,4 +1,6 @@
 const Koa = require('koa')
+const session = require('koa-generic-session');
+const redisStore = require('koa-redis');
 const cors = require('@koa/cors');
 const app = new Koa()
 const server = require('http').Server(app.callback())
@@ -9,6 +11,19 @@ const router = require("koa-router")();
 const addRouters = require("./router");
 const creatSocket = require('./socket');
 const config = require("./config/app");
+
+// session做加密处理
+app.keys = ['keys', 'keykeys'];
+app.use(session({
+  key: 'mt',
+  prefix: 'mtpr',
+  store: new redisStore({
+    // Options specified here
+    host: '127.0.0.1',
+    port: 6379,
+    pass: '12345',
+  })
+}));
 
 app.use(cors()); //设置跨域cors
 
